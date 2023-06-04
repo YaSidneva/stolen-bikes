@@ -1,0 +1,38 @@
+.header {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .nav {
+    min-width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-self: end;
+  }
+
+  .form_wrapper {
+    width: 50%;
+    height: 70%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media all and (max-width: 380px) {
+    .nav {
+      min-width: 290px;
+      align-self: center;
+    }
+  }

@@ -1,0 +1,35 @@
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .contacts {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 5px;
+  }
+  
+  .svg_icon {
+    width: 45px;
+    fill: #f7f8f9;
+  }
+  
+  .contacts:hover {
+    color: #217093;
+    background-color: #ddf1fa;
+    border-radius: 5px;
+  }
+  
+  .contacts:hover .svg_icon {
+    fill: #5d80b6;
+  }
+
+  @media all and (max-width: 380px) {  
+    .footer {
+      flex-direction: column-reverse;
+    }
+  }

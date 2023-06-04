@@ -1,0 +1,16 @@
+.button {
+    padding: 5px;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+    border: 2px solid #ddf1fa;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .button:hover {
+    color: #217093;
+    background-color: #ddf1fa;
+  }
