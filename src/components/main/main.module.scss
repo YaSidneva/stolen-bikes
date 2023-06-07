@@ -30,6 +30,25 @@
     margin-right: 20px;
     border-radius: 5px;
   }
+
+  .form_wrapper {
+    width: 80%;
+    height: 95%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-evenly;
+  }
+
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+
   @media all and (max-width: 1200px) {
     .description {
       flex-direction: column-reverse;

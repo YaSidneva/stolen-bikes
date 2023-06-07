@@ -18,10 +18,12 @@
 
   .form_wrapper {
     width: 50%;
-    height: 70%;
+    height: 50%;
     background-color: white;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    justify-content: space-evenly;
   }
 
   .modal {

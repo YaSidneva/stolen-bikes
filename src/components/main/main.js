@@ -1,8 +1,16 @@
+import { useState } from "react";
 import css from './main.module.scss';
 import { Button } from '../shared/buttons/button/button';
-import Image from '../shared/images/yeti-stole-bike.jpg'
+import Image from '../shared/images/yeti-stole-bike.jpg';
+import { Modal } from "@mui/material";
+import { AddReport } from "../TheftReport/TheftReport";
+import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
 
-export const Main = () => {
+export const Main = (props) => {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
     return (
         <main className={css.main}>
         <div className={css.description}>
@@ -26,7 +34,21 @@ export const Main = () => {
           </div>
           <img className={css.description_img} src={Image} alt="yeti-stole-bike"/>
         </div>
-        <Button className={css.add_theft}>Сообщить о краже</Button>
+        <Button className={css.add_theft} onClick={() => setOpen(true)}>Сообщить о краже</Button>
+
+        <Modal
+        className={css.modal}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      > 
+        
+        <div className={css.form_wrapper}>
+        <ButtonModalClose onClick={() => setOpen(false)} />
+          <AddReport />
+        </div>
+      </Modal>
       </main>
     )
 }

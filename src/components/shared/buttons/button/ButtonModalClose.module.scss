@@ -1,0 +1,16 @@
+.form_close {
+    background: none;
+    border: none;
+    position: relative;
+    top: -13px;
+    align-self: flex-end;
+  }
+
+  .form_close:hover {
+    cursor: pointer;
+  }
+
+  .form_close:hover .close_icon {
+    width: 18px;
+    height: 18px;
+}

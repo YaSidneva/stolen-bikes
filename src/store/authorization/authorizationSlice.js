@@ -23,11 +23,11 @@ const autorizationSlice = createSlice({
   initialState,
   reducers: {
     getAutorization: (state, action) => {
-
-    }
+      
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase();
+  //  builder.addCase();
   },
 });
 
