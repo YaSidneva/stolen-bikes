@@ -39,7 +39,7 @@ export const Header = () => {
         aria-describedby="modal-modal-description"
       >
         <div className={css.form_wrapper}>
-          <ButtonModalClose onClick={() => handleCloseEnter} />
+          <ButtonModalClose onClick={() => setOpenEnter(false)} />
           <Form />
         </div>
       </Modal>
@@ -51,8 +51,8 @@ export const Header = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className={css.form_wrapper} style={{height: "80%"}}>
-        <ButtonModalClose onClick={() => handleCloseReg} />
+        <div className={css.form_wrapper} style={{ height: "80%" }}>
+          <ButtonModalClose onClick={() => handleCloseReg} />
           <FormRegistration />
         </div>
       </Modal>
