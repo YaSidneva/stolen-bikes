@@ -32,6 +32,12 @@
     align-items: center;
   }
 
+  .wrapper_list {
+    height: auto;
+    width: auto;
+    max-width: 96%;
+  }
+
   @media all and (max-width: 380px) {
     .nav {
       min-width: 290px;

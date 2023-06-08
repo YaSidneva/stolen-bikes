@@ -4,6 +4,8 @@ import { Button } from "../shared/buttons/button/button";
 import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
 import { Form } from "../form/Form";
 import { FormRegistration } from "../form/FormRegistration";
+import { ListOfThefts } from "../lists/ListOfThefts";
+import { ListOfEmloyees } from "../lists/ListOfEmployees";
 import { Modal } from "@mui/material";
 
 export const Header = () => {
@@ -16,6 +18,19 @@ export const Header = () => {
   const handleCloseReg = () => {
     setOpenReg(false);
   };
+
+  const [openTheftsList, setOpenTheftsList] = useState(false);
+  const handleCloseTheftsList = () => {
+    setOpenTheftsList(false);
+  };
+
+  const [openEmployeesList, setOpenEmployeesList] = useState(false);
+  const handleCloseEmployeesList = () => {
+    setOpenEmployeesList(false);
+  };
+
+  const [autontificated, setAutontificated] = useState(true);
+
   return (
     <header className={css.header}>
       <h1>
@@ -23,11 +38,42 @@ export const Header = () => {
         городов.
       </h1>
       <nav className={css.nav}>
-        <Button className={css.button} onClick={() => setOpenEnter(true)}>
+        <Button
+          hide={!autontificated}
+          className={css.button}
+          onClick={() => setOpenTheftsList(true)}
+        >
+          Список краж
+        </Button>
+
+        <Button
+          hide={!autontificated}
+          className={css.button}
+          onClick={() => setOpenEmployeesList(true)}
+        >
+          Список сотрудников
+        </Button>
+
+        <Button
+          hide={autontificated}
+          className={css.button}
+          onClick={() => setOpenEnter(true)}
+        >
           Войти
         </Button>
-        <Button className={css.button} onClick={() => setOpenReg(true)}>
+        <Button
+          hide={autontificated}
+          className={css.button}
+          onClick={() => setOpenReg(true)}
+        >
           Зарегистрироваться
+        </Button>
+        <Button
+          hide={!autontificated}
+          className={css.button}
+          onClick={() => setOpenReg(true)}
+        >
+          Выйти
         </Button>
       </nav>
 
@@ -54,6 +100,32 @@ export const Header = () => {
         <div className={css.form_wrapper} style={{ height: "80%" }}>
           <ButtonModalClose onClick={() => handleCloseReg} />
           <FormRegistration />
+        </div>
+      </Modal>
+
+      <Modal
+        className={css.modal}
+        open={openTheftsList}
+        onClose={handleCloseTheftsList}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className={`${css.wrapper_list} ${css.form_wrapper} `}>
+          <ButtonModalClose onClick={() => setOpenTheftsList(false)} />
+          <ListOfThefts />
+        </div>
+      </Modal>
+
+      <Modal
+        className={css.modal}
+        open={openEmployeesList}
+        onClose={handleCloseEmployeesList}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className={`${css.wrapper_list} ${css.form_wrapper} `}>
+          <ButtonModalClose onClick={() => setOpenEmployeesList(false)} />
+          <ListOfEmloyees />
         </div>
       </Modal>
     </header>

@@ -24,12 +24,12 @@ export const AddReport = () => {
   const dispatch = useDispatch();
   return (
     <>
-      <TextField required id="license-number" label="Номер лицензии" />
-      <TextField required id="client-data" label="ФИО клиента" />
-      <InputLabel id="bike-type">Тип велосипеда *</InputLabel>
+      <TextField required id="licenseNumber" label="Номер лицензии" />
+      <TextField required id="ownerFullName" label="ФИО клиента" />
+      <InputLabel id="type">Тип велосипеда *</InputLabel>
       <Select
         required
-        labelId="bike-type"
+        labelId="type"
         id="bike-type-select"
         value={selectedOption}
         onChange={handleOptionChange}
@@ -42,10 +42,11 @@ export const AddReport = () => {
         <MenuItem value={"electric-bike"}>Электровелосипед</MenuItem>
       </Select>
 
-      <TextField id="bike-color" label="Цвет велосипеда" />
+      <TextField id="color" label="Цвет велосипеда" />
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
+            id="date"
           label="Выберите дату"
           value={selectedDate}
           onChange={handleDateChange}
@@ -54,7 +55,7 @@ export const AddReport = () => {
       </LocalizationProvider>
 
       <TextField
-        id="more-info"
+        id="description"
         label="Дополнительная информация"
         multiline
         rows={4}
