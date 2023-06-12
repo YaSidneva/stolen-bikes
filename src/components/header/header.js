@@ -7,11 +7,15 @@ import { FormRegistration } from "../form/FormRegistration";
 import { ListOfThefts } from "../lists/ListOfThefts";
 import { ListOfEmloyees } from "../lists/ListOfEmployees";
 import { Modal } from "@mui/material";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
   const [openEnt, setOpenEnter] = useState(false);
   const handleCloseEnter = () => {
     setOpenEnter(false);
+  };
+  const handleClickEnter = () => {
+    setOpenEnter(true);
   };
 
   const [openReg, setOpenReg] = useState(false);
@@ -32,7 +36,10 @@ export const Header = () => {
     setOpenEmployeesList(false);
   };
 
-  const [autontificated, setAutontificated] = useState(false);
+  const token = useSelector((state) => state.autorization.token);
+  console.log(token);
+
+  const [autontificated, setAutontificated] = useState(token?true:false);
 
   return (
     <header className={css.header}>
@@ -60,12 +67,11 @@ export const Header = () => {
         <Button
           hide={autontificated}
           className={css.button}
-          onClick={() => setOpenEnter(true)}
+          onClick={handleClickEnter}
         >
           Войти
         </Button>
-      
-   
+
         <Button
           hide={autontificated}
           className={css.button}
@@ -73,8 +79,6 @@ export const Header = () => {
         >
           Зарегистрироваться
         </Button>
-       
-
 
         <Button
           hide={!autontificated}
@@ -85,7 +89,7 @@ export const Header = () => {
         </Button>
       </nav>
 
-      <Modal
+      {/* <Modal
         className={css.modal}
         open={openEnt}
         onClose={handleCloseEnter}
@@ -96,11 +100,11 @@ export const Header = () => {
           <ButtonModalClose onClick={() => setOpenEnter(false)} />
           <Form />
         </div>
-      </Modal>
+      </Modal> */}
 
-      <FormRegistration 
-      open={openReg}
-      handleCloseReg={handleCloseReg}/>
+      <Form open={openEnt} handleCloseEnter={handleCloseEnter} />
+
+      <FormRegistration open={openReg} handleCloseReg={handleCloseReg} />
 
       <Modal
         className={css.modal}
