@@ -18,6 +18,9 @@ export const Header = () => {
   const handleCloseReg = () => {
     setOpenReg(false);
   };
+  const handleClick = () => {
+    setOpenReg(true);
+  };
 
   const [openTheftsList, setOpenTheftsList] = useState(false);
   const handleCloseTheftsList = () => {
@@ -29,7 +32,7 @@ export const Header = () => {
     setOpenEmployeesList(false);
   };
 
-  const [autontificated, setAutontificated] = useState(true);
+  const [autontificated, setAutontificated] = useState(false);
 
   return (
     <header className={css.header}>
@@ -61,13 +64,18 @@ export const Header = () => {
         >
           Войти
         </Button>
+      
+   
         <Button
           hide={autontificated}
           className={css.button}
-          onClick={() => setOpenReg(true)}
+          onClick={handleClick}
         >
           Зарегистрироваться
         </Button>
+       
+
+
         <Button
           hide={!autontificated}
           className={css.button}
@@ -90,18 +98,9 @@ export const Header = () => {
         </div>
       </Modal>
 
-      <Modal
-        className={css.modal}
-        open={openReg}
-        onClose={handleCloseReg}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <div className={css.form_wrapper} style={{ height: "80%" }}>
-          <ButtonModalClose onClick={() => handleCloseReg} />
-          <FormRegistration />
-        </div>
-      </Modal>
+      <FormRegistration 
+      open={openReg}
+      handleCloseReg={handleCloseReg}/>
 
       <Modal
         className={css.modal}
