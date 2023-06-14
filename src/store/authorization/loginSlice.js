@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const loginSlice = createSlice({
-  name: "user",
+  name: "auth",
   initialState,
   reducers: {
     loginUserRequest: (state) => {
@@ -44,5 +44,10 @@ export const loginUser = (userData) => async (dispatch) => {
     dispatch(loginUserFailure(error.message));
   }
 };
+
+export const userPersistConfig = {
+    key: 'auth',
+    storage: localStorage,
+  };
 
 export default loginSlice.reducer;

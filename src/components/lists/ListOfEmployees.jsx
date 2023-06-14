@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
     Table,
     TableHead,
@@ -11,11 +12,16 @@ import {
 
   
   export const ListOfEmloyees = () => {
-    const data = [
-      { email: 1, firstName: "John", lastName: 25, approved: 'true' },
-      { email: 1, firstName: "John", lastName: 25, approved: 'true' },
-      { email: 1, firstName: "John", lastName: 25, approved: 'false' }
-    ];
+    const [data, setData] = useState([
+      { id: 1, email: 1, firstName: "John", lastName: 25, approved: 'true' },
+      { id: 2, email: 1, firstName: "John", lastName: 25, approved: 'true' },
+      { id: 3, email: 1, firstName: "John", lastName: 25, approved: 'false' }
+    ]);
+
+    const handleDelete = (id) => {
+        const updatedData = data.filter((item) => item.id !== id);
+        setData(updatedData);
+      };
   
     return (
       <TableContainer component={Paper}>
@@ -36,7 +42,7 @@ import {
                 <TableCell>{item.firstName}</TableCell>
                 <TableCell>{item.lastName}</TableCell>
                 <TableCell>{item.approved}</TableCell>
-                <TableCell><ButtonModalClose /></TableCell>
+                <TableCell><ButtonModalClose  variant="contained" color="secondary" onClick={() => handleDelete(item.id)} /></TableCell>
               </TableRow>
             ))}
           </TableBody>

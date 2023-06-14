@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Table,
   TableHead,
@@ -12,11 +13,16 @@ import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
 import css from './ListOfThefts.module.scss'
 
 export const ListOfThefts = () => {
-  const data = [
+  const [data, setData] = useState([
     { id: 1, licenseNumber: "John", ownerFullName: 25, type: '123', color: 'black', date: '456', description: 'balbla', officer:'II' },
     { id: 2, licenseNumber: "John", ownerFullName: 25, type: '123', color: 'black', date: '456', description: 'balbla', officer:'II' },
     { id: 3, licenseNumber: "John", ownerFullName: 25, type: '123', color: 'black', date: '456', description: 'balbla', officer:'II' }
-  ];
+]);
+
+const handleDelete = (id) => {
+    const updatedData = data.filter((item) => item.id !== id);
+    setData(updatedData);
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -43,7 +49,7 @@ export const ListOfThefts = () => {
               <TableCell>{item.date}</TableCell>
               <TableCell>{item.description}</TableCell>
               <TableCell>{item.officer}</TableCell>
-              <TableCell><ButtonModalClose /></TableCell>
+              <TableCell><ButtonModalClose  variant="contained" color="secondary" onClick={() => handleDelete(item.id)}/></TableCell>
             </TableRow>
           ))}
         </TableBody>

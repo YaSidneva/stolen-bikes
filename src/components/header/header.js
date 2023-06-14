@@ -36,7 +36,7 @@ export const Header = () => {
     setOpenEmployeesList(false);
   };
 
-  const token = useSelector((state) => state.autorization.token);
+  const token = useSelector((state) => state.auth.token);
   console.log(token);
 
   const [autontificated, setAutontificated] = useState(token?true:false);
