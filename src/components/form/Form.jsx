@@ -30,6 +30,7 @@ export const Form = (props) => {
     dispatch(loginUser(userData));
     setEmail("");
     setPassword("");
+    props.handleCloseEnter();
   };
   return (
     <Modal
