@@ -26,10 +26,16 @@ const loginSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    logout: (state) => {
+        state.loading = true;
+        state.error = null;
+        state.user = null;
+        state.token = null;
+      },
   },
 });
 
-export const { loginUserRequest, loginUserSuccess, loginUserFailure } =
+export const { loginUserRequest, loginUserSuccess, loginUserFailure, logout } =
   loginSlice.actions;
 
 export const loginUser = (userData) => async (dispatch) => {
@@ -44,10 +50,5 @@ export const loginUser = (userData) => async (dispatch) => {
     dispatch(loginUserFailure(error.message));
   }
 };
-
-export const userPersistConfig = {
-    key: 'auth',
-    storage: localStorage,
-  };
 
 export default loginSlice.reducer;

@@ -7,16 +7,22 @@ import { FormRegistration } from "../form/FormRegistration";
 import { ListOfThefts } from "../lists/ListOfThefts";
 import { ListOfEmloyees } from "../lists/ListOfEmployees";
 import { Modal } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/authorization/loginSlice";
 
 export const Header = () => {
   const [openEnt, setOpenEnter] = useState(false);
+  const dispatch = useDispatch();
   const handleCloseEnter = () => {
     setOpenEnter(false);
   };
   const handleClickEnter = () => {
     setOpenEnter(true);
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  }
 
   const [openReg, setOpenReg] = useState(false);
   const handleCloseReg = () => {
@@ -36,10 +42,9 @@ export const Header = () => {
     setOpenEmployeesList(false);
   };
 
-  const token = useSelector((state) => state.auth.token);
-  console.log(token);
-
-  const [autontificated, setAutontificated] = useState(token?true:false);
+  const autontificated = useSelector((state) =>
+    state.auth.token ? true : false
+  );
 
   return (
     <header className={css.header}>
@@ -83,7 +88,7 @@ export const Header = () => {
         <Button
           hide={!autontificated}
           className={css.button}
-          onClick={() => setOpenReg(true)}
+          onClick={() => handleLogout()}
         >
           Выйти
         </Button>
