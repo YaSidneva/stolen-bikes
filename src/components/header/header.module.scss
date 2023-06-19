@@ -39,9 +39,33 @@
     max-width: 96%;
   }
 
+  .nav_auth {
+    width: 40%;
+    display: flex;
+  justify-content: space-between;
+  align-self: end;
+  }
+
   @media all and (max-width: 380px) {
     .nav {
       min-width: 290px;
       align-self: center;
+    }
+  }
+
+  @media all and (max-width: 1080px) {
+    .nav_auth {
+      min-width: 420px;
+    }
+  }
+
+  @media all and (max-width: 563px) {
+    .nav_auth {
+      align-self: center;
+      font-size: 18px;
+      flex-direction: column;
+      height: 150px;
+      width: 100%;
+      min-width: 200px;
     }
   }

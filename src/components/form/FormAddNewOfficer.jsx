@@ -1,4 +1,4 @@
-import { Button, TextField, Modal } from "@mui/material";
+import { Button, TextField, Modal, Checkbox, FormControlLabel } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import css from "../header/header.module.scss";
 import React, { useState } from "react";
@@ -8,10 +8,10 @@ import { createEmployee } from "../../store/employees/employeesSlice";
 
 export const FormAddNewOfficer = (props) => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState(props.email || "");
+  const [password, setPassword] = useState(props.password || "");
+  const [firstName, setFirstName] = useState(props.firstName || "");
+  const [lastName, setLastName] = useState(props.lastName || "");
   const token = useSelector((state) => state.auth.token);
 
   const handleEmailChange = (e) => {
@@ -90,6 +90,8 @@ export const FormAddNewOfficer = (props) => {
           onChange={handleLastNameChange}
           label="Фамилия"
         />
+
+    <FormControlLabel control={<Checkbox />} label="Approved" style={{color: 'rgba(0, 0, 0, 0.87)'}}/>    
         <Button type="submit">Добавить</Button>
       </form>
     </Modal>

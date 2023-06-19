@@ -20,7 +20,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { ButtonAdd } from "../shared/buttons/button/buttonAdd";
 import { FormAddNewOfficer } from "../form/FormAddNewOfficer";
 
-
 export const ListOfEmloyees = () => {
   //   const [data, setData] = useDispatch(getEmployees());
   //   useState([
@@ -28,7 +27,6 @@ export const ListOfEmloyees = () => {
   //     { id: 2, email: 1, firstName: "John", lastName: 25, approved: true },
   //     { id: 3, email: 1, firstName: "John", lastName: 25, approved: false },
   //   ]);
-
   const data = useSelector((state) => state.employees.data);
   const token = useSelector((state) => state.auth.token);
   const [modalOpen, setModalOpen] = useState(false);
@@ -59,14 +57,15 @@ export const ListOfEmloyees = () => {
     setModalOpen(true);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
     dispatch(deleteEmployee(id, token));
   };
- 
 
   return (
     <>
-      <TableContainer component={Paper}  style={{marginBottom: '1em'}}>
+      <TableContainer component={Paper} style={{ marginBottom: "1em" }}>
         <Table className={css.table}>
           <TableHead>
             <TableRow>
@@ -91,7 +90,7 @@ export const ListOfEmloyees = () => {
                   <Checkbox checked={item.approved} disabled />
                 </TableCell>
                 <TableCell>
-                  <ButtonModalClose onClick={() => handleDelete(item._id)} />
+                  <ButtonModalClose onClick={(e) => handleDelete(e, item._id)} />
                 </TableCell>
               </TableRow>
             ))}
@@ -99,19 +98,14 @@ export const ListOfEmloyees = () => {
         </Table>
       </TableContainer>
 
-      <ButtonAdd
-        
-          className={css.button}
-          onClick={handleOpenAddOfficer}
-        >
-          Добавить сотрудника
-        </ButtonAdd>
+      <ButtonAdd className={css.button} onClick={handleOpenAddOfficer}>
+        Добавить сотрудника
+      </ButtonAdd>
 
-        <FormAddNewOfficer
+      <FormAddNewOfficer
         open={isOpenAddOfficer}
         onClose={handleCloseAddOfficer}
       />
-      
 
       <DetailsPageEmployee
         open={modalOpen}
