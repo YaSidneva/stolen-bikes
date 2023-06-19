@@ -43,7 +43,7 @@ export const Main = (props) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       > 
-        <div className={css.form_wrapper}>
+        <div className={css.form_wrapper} style={{height: '98%'}}>
         <ButtonModalClose onClick={() => setOpen(false)} />
           <AddReport />
         </div>

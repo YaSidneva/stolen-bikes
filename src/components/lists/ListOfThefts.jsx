@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
-import css from './ListOfThefts.module.scss'
+import css from './ListOfEmployees.module.scss'
 
 export const ListOfThefts = () => {
   const [data, setData] = useState([
@@ -26,7 +26,7 @@ const handleDelete = (id) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table>
+      <Table className={css.table}>
         <TableHead>
           <TableRow>
             <TableCell>Номер лицензии</TableCell>
@@ -41,7 +41,7 @@ const handleDelete = (id) => {
         </TableHead>
         <TableBody>
           {data.map((item) => (
-            <TableRow key={item.id}>
+            <TableRow key={item.id}  className={css.row}>
               <TableCell>{item.licenseNumber}</TableCell>
               <TableCell>{item.ownerFullName}</TableCell>
               <TableCell>{item.type}</TableCell>

@@ -12,8 +12,14 @@ import {
 import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
 import { DetailsPageEmployee } from "./detailsPage/DetailsPageEmployee";
 import css from "./ListOfEmployees.module.scss";
-import { getEmployees } from "../../store/employees/employeesSlice";
+import {
+  deleteEmployee,
+  getEmployees,
+} from "../../store/employees/employeesSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { ButtonAdd } from "../shared/buttons/button/buttonAdd";
+import { FormAddNewOfficer } from "../form/FormAddNewOfficer";
+
 
 export const ListOfEmloyees = () => {
   //   const [data, setData] = useDispatch(getEmployees());
@@ -22,11 +28,21 @@ export const ListOfEmloyees = () => {
   //     { id: 2, email: 1, firstName: "John", lastName: 25, approved: true },
   //     { id: 3, email: 1, firstName: "John", lastName: 25, approved: false },
   //   ]);
+
   const data = useSelector((state) => state.employees.data);
   const token = useSelector((state) => state.auth.token);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const dispatch = useDispatch();
+
+  const [isOpenAddOfficer, setIsOpenAddOfficer] = useState(false);
+  const handleOpenAddOfficer = () => {
+    setIsOpenAddOfficer(true);
+  };
+
+  const handleCloseAddOfficer = () => {
+    setIsOpenAddOfficer(false);
+  };
 
   useEffect(() => {
     dispatch(getEmployees(token)); // Выполняем запрос к серверу при монтировании компонента
@@ -44,13 +60,13 @@ export const ListOfEmloyees = () => {
   };
 
   const handleDelete = (id) => {
-    // const updatedData = data.filter((item) => item.id !== id);
-    // setData(updatedData);
+    dispatch(deleteEmployee(id, token));
   };
+ 
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper}  style={{marginBottom: '1em'}}>
         <Table className={css.table}>
           <TableHead>
             <TableRow>
@@ -66,7 +82,7 @@ export const ListOfEmloyees = () => {
               <TableRow
                 key={item.id}
                 onClick={() => handleRowClick(item)}
-                className={css.raw}
+                className={css.row}
               >
                 <TableCell>{item.email}</TableCell>
                 <TableCell>{item.firstName}</TableCell>
@@ -75,13 +91,27 @@ export const ListOfEmloyees = () => {
                   <Checkbox checked={item.approved} disabled />
                 </TableCell>
                 <TableCell>
-                  <ButtonModalClose onClick={() => handleDelete(item.id)} />
+                  <ButtonModalClose onClick={() => handleDelete(item._id)} />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+
+      <ButtonAdd
+        
+          className={css.button}
+          onClick={handleOpenAddOfficer}
+        >
+          Добавить сотрудника
+        </ButtonAdd>
+
+        <FormAddNewOfficer
+        open={isOpenAddOfficer}
+        onClose={handleCloseAddOfficer}
+      />
+      
 
       <DetailsPageEmployee
         open={modalOpen}

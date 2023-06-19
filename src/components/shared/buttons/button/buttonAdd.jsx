@@ -1,6 +1,6 @@
-import css from "./Button.module.scss";
+import css from "./ButtonAdd.module.scss";
 
-export const Button = (props) => {
+export const ButtonAdd = (props) => {
   return (
     <div
       className={`${props.className} ${css.button}`}

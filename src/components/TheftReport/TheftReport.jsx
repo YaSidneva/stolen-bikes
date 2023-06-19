@@ -41,7 +41,8 @@ export const AddReport = () => {
         <MenuItem value={"cyclocross-bike"}>Циклокроссовый велосипед</MenuItem>
         <MenuItem value={"electric-bike"}>Электровелосипед</MenuItem>
       </Select>
-
+      
+      <TextField id="clientId" label="Client Id"  required/>   
       <TextField id="color" label="Цвет велосипеда" />
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>

@@ -47,4 +47,24 @@ export const getEmployees = (token) => async (dispatch) => {
   }
 };
 
+export const deleteEmployee = (id, token) => async (dispatch) => {
+  axios
+    .delete(`https://sf-final-project-be.herokuapp.com/api/officers/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(dispatch(getEmployees(token)));
+};
+
+export const createEmployee = (data, token) => async (dispatch) => {
+  axios
+    .post(`https://sf-final-project-be.herokuapp.com/api/officers`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(dispatch(getEmployees(token)));
+};
+
 export default employeesSlice.reducer;

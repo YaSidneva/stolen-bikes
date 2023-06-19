@@ -1,22 +1,18 @@
 import { Button, TextField, Modal } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import css from "../header/header.module.scss";
-//import { getUserData } from "../../store/authorization/authorizationSlice";
 import React, { useState } from "react";
-import { registerUser } from "../../store/registration/userSlice";
 import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
+import { createEmployee } from "../../store/employees/employeesSlice";
 //import userSlice from "../../store/registration/userSlice";
 
-export const FormRegistration = (props) => {
+export const FormAddNewOfficer = (props) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [clientId, setClientId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  // const [openReg, setOpenReg] = useState(props.open);
-  const handleCloseReg = props.handleCloseReg;
+  const token = useSelector((state) => state.auth.token);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -24,10 +20,6 @@ export const FormRegistration = (props) => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-  };
-
-  const handleClientIdChange = (e) => {
-    setClientId(e.target.value);
   };
 
   const handleFirstNameChange = (e) => {
@@ -43,23 +35,22 @@ export const FormRegistration = (props) => {
     const userData = {
       email,
       password,
-      clientId,
       firstName,
       lastName,
     };
-    dispatch(registerUser(userData));
+    dispatch(createEmployee(userData, token));
     setEmail("");
     setPassword("");
-    setClientId("");
     setFirstName("");
     setLastName("");
+    props.onClose();
   };
 
   return (
     <Modal
       className={css.modal}
       open={props.open}
-      onClose={props.handleCloseReg}
+      onClose={props.onClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -68,7 +59,7 @@ export const FormRegistration = (props) => {
         className={css.form_wrapper}
         style={{ height: "80%" }}
       >
-        <ButtonModalClose onClick={handleCloseReg} />
+        <ButtonModalClose onClick={props.onClose} />
         <TextField
           type="email"
           id="email"
@@ -87,14 +78,6 @@ export const FormRegistration = (props) => {
         />
         <TextField
           type="text"
-          id="clientId"
-          value={clientId}
-          onChange={handleClientIdChange}
-          required
-          label="Client ID"
-        />
-        <TextField
-          type="text"
           id="firstName"
           value={firstName}
           onChange={handleFirstNameChange}
@@ -107,7 +90,7 @@ export const FormRegistration = (props) => {
           onChange={handleLastNameChange}
           label="Фамилия"
         />
-        <Button type="submit">Зарегистрироваться</Button>
+        <Button type="submit">Добавить</Button>
       </form>
     </Modal>
   );
