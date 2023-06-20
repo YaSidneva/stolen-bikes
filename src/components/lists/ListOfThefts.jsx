@@ -58,7 +58,7 @@ export const ListOfThefts = () => {
           </TableHead>
           <TableBody>
             {data?.data?.map((item) => (
-              <TableRow key={item.id} className={css.row}>
+              <TableRow key={item._id} className={css.row}>
                 <TableCell>{item.licenseNumber}</TableCell>
                 <TableCell>{item.ownerFullName}</TableCell>
                 <TableCell>{item.type}</TableCell>
@@ -70,7 +70,7 @@ export const ListOfThefts = () => {
                   <ButtonModalClose
                     variant="contained"
                     color="secondary"
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDelete(item._id)}
                   />
                 </TableCell>
               </TableRow>

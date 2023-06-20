@@ -28,7 +28,7 @@ const reportsSlice = createSlice({
 });
 
 export const { reportsRequest, reportsSuccess, reportsFailure } =
-reportsSlice.actions;
+  reportsSlice.actions;
 
 export const getReports = (token) => async (dispatch) => {
   try {
@@ -48,28 +48,35 @@ export const getReports = (token) => async (dispatch) => {
 };
 
 export const deleteReport = (id, token) => async (dispatch) => {
-  axios
-    .delete(`https://sf-final-project-be.herokuapp.com/api/cases/${id}`, {
+  await axios.delete(
+    `https://sf-final-project-be.herokuapp.com/api/cases/${id}`,
+    {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
-    .then(dispatch(getReports(token)));
+    }
+  );
+  dispatch(getReports(token));
 };
 
 export const createReport = (data, token) => async (dispatch) => {
-  axios
-    .post(`https://sf-final-project-be.herokuapp.com/api/cases/`, data, {
+  await axios.post(
+    `https://sf-final-project-be.herokuapp.com/api/cases/`,
+    data,
+    {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
-    .then(dispatch(getReports(token)));
+    }
+  );
+  dispatch(getReports(token));
 };
 
 export const createReportPublic = (data) => async (dispatch) => {
-    axios
-      .post(`https://sf-final-project-be.herokuapp.com/api/public/report`, data)
-  };
+  axios.post(
+    `https://sf-final-project-be.herokuapp.com/api/public/report`,
+    data
+  );
+};
 
 export default reportsSlice.reducer;
