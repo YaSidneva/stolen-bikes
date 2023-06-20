@@ -1,0 +1,27 @@
+.logo {
+    position: absolute;
+    top: 25px;
+    left: 33px;
+    width: 56px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid white;
+  }
+
+  .logo:hover {
+    cursor: pointer;
+    background-color: white;
+  }
+
+  @media all and (max-width: 563px) {
+    .logo {
+        top: 77px;
+    }
+  }
+
+  @media all and (max-width: 340px) {
+    .logo {
+        left: 13px;
+        width: 40px;
+    }
+  }

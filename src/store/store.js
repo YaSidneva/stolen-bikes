@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import userReducer from "./registration/userSlice";
 import employeesReducer from "./employees/employeesSlice";
+import reportsReducer from "./theftReport/reportSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import { default as loginReducer } from "./authorization/loginSlice";
 
@@ -13,7 +14,8 @@ const persistConfig = {
 export const rootReducer = combineReducers({
   auth: loginReducer,
   user: userReducer,
-  employees: employeesReducer
+  employees: employeesReducer,
+  reports: reportsReducer
 })
 
 

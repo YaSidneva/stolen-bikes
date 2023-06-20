@@ -19,6 +19,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonAdd } from "../shared/buttons/button/buttonAdd";
 import { FormAddNewOfficer } from "../form/FormAddNewOfficer";
+import { Button } from "../shared/buttons/button/button";
 
 export const ListOfEmloyees = () => {
   //   const [data, setData] = useDispatch(getEmployees());
@@ -65,10 +66,11 @@ export const ListOfEmloyees = () => {
 
   return (
     <>
-      <TableContainer component={Paper} style={{ marginBottom: "1em" }}>
+      <TableContainer component={Paper} style={{ marginBottom: "1em", maxHeight: 300, overflow: 'auto' }}>
         <Table className={css.table}>
-          <TableHead>
+          <TableHead className={css.table_head}>
             <TableRow>
+            <TableCell>ClientId</TableCell>
               <TableCell>E-mail</TableCell>
               <TableCell>Имя</TableCell>
               <TableCell>Фамилия</TableCell>
@@ -76,13 +78,15 @@ export const ListOfEmloyees = () => {
               <TableCell>Удалить</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+         
+          <TableBody style={{ overflow: 'auto', maxHeight: 250 }}>
             {data?.officers?.map((item) => (
               <TableRow
                 key={item.id}
                 onClick={() => handleRowClick(item)}
                 className={css.row}
               >
+                <TableCell>{item.clientId}</TableCell>
                 <TableCell>{item.email}</TableCell>
                 <TableCell>{item.firstName}</TableCell>
                 <TableCell>{item.lastName}</TableCell>
@@ -94,13 +98,13 @@ export const ListOfEmloyees = () => {
                 </TableCell>
               </TableRow>
             ))}
-          </TableBody>
+           </TableBody>
         </Table>
       </TableContainer>
 
-      <ButtonAdd className={css.button} onClick={handleOpenAddOfficer}>
+      <Button className={css.button} onClick={handleOpenAddOfficer}>
         Добавить сотрудника
-      </ButtonAdd>
+      </Button>
 
       <FormAddNewOfficer
         open={isOpenAddOfficer}

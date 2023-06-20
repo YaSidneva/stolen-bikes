@@ -46,6 +46,8 @@
   align-self: end;
   }
 
+  
+
   @media all and (max-width: 380px) {
     .nav {
       min-width: 290px;
@@ -61,11 +63,9 @@
 
   @media all and (max-width: 563px) {
     .nav_auth {
-      align-self: center;
       font-size: 18px;
       flex-direction: column;
       height: 150px;
-      width: 100%;
-      min-width: 200px;
+      min-width: 201px;
     }
   }

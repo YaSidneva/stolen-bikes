@@ -10,6 +10,7 @@ import { Modal } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/authorization/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { Logo } from "./logo/Logo";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -35,15 +36,6 @@ export const Header = () => {
     setOpenReg(true);
   };
 
-  const [openTheftsList, setOpenTheftsList] = useState(false);
-  const handleCloseTheftsList = () => {
-    setOpenTheftsList(false);
-  };
-
-  const [openEmployeesList, setOpenEmployeesList] = useState(false);
-  const handleCloseEmployeesList = () => {
-    setOpenEmployeesList(false);
-  };
 
   const autontificated = useSelector((state) =>
     state.auth.token ? true : false
@@ -57,7 +49,7 @@ export const Header = () => {
       </h1>
       <nav className={!autontificated ? css.nav : css.nav_auth}>
         {/* TODO: MAke a logo */}
-        <img href="favicon.svg" alt="logo" onClick={() => navigate("/")} />
+        <Logo/>
         <Button
           hide={!autontificated}
           className={css.button}

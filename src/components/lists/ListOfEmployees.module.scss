@@ -7,3 +7,10 @@
 .table td {
   text-align: center;
 }
+
+.table_head {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}

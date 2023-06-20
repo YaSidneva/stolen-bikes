@@ -5,16 +5,13 @@ import { Footer } from "./components/footer/footer";
 import { ListOfEmloyees } from "./components/lists/ListOfEmployees";
 import { Header } from "./components/header/header";
 import { ListOfThefts } from "./components/lists/ListOfThefts";
+import { Root } from "./components/root/Root";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Layout>
-        <Header />
-        <Outlet />
-        <Footer />
-      </Layout>
+      <Root/>
     ),
     children: [
       {
