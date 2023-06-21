@@ -1,15 +1,20 @@
-import { Button, TextField, InputLabel, Select, MenuItem } from "@mui/material";
+import { Button, TextField, InputLabel, Select, MenuItem, Modal } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { getUserData } from "../../store/authorization/authorizationSlice";
 import css from "./TheftReport.module.scss";
-import { createReport } from "../../store/theftReport/reportSlice";
+import {
+  createReport,
+  createReportPublic,
+} from "../../store/theftReport/reportSlice";
 import { Form } from "../form/Form";
+import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
 
-export const AddReport = () => {
+export const AddReport = (props) => {
   const dispatch = useDispatch();
+  const handleClose = props.handleClose;
 
   const [licenseNumber, setSelectedLicense] = useState(null);
   const handleLicenseChange = (event) => {
@@ -49,10 +54,9 @@ export const AddReport = () => {
   const autontificated = useSelector((state) =>
     state.auth.token ? true : false
   );
-  const token = useSelector((state) => state.auth.token)
+  const token = useSelector((state) => state.auth.token);
 
   const data = useSelector((state) => state.employees.data);
-  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -64,73 +68,114 @@ export const AddReport = () => {
       type,
       color,
       date,
-      description
+      description,
+    };
+
+    const reportDataPublic = {
+      licenseNumber,
+      ownerFullName,
+      type,
+      color,
+      date,
+      description,
+      clientId: "a1165252-8bf2-4f9d-9200-203074b63881",
     };
     if (autontificated) {
-      dispatch(createReport(reportData, token))
+      dispatch(createReport(reportData, token));
+    } else {
+      dispatch(createReportPublic(reportDataPublic));
     }
-  }
-  
+
+    handleClose();
+  };
 
   return (
-    <form onSubmit={handleSubmit}> 
-      <TextField required id="licenseNumber" label="Номер лицензии" onChange={handleLicenseChange} />
-      <TextField required id="ownerFullName" label="ФИО клиента" onChange={handleOwnerChange}/>
+    <Modal
+      className={css.modal}
+      open={props.open}
+      onClose={props.handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <div className={css.wrapper} style={{ height: "98%" }}>
+        <ButtonModalClose onClick={props.handleClose} />
+        <form onSubmit={handleSubmit} className={css.form_wrapper}>
+          <TextField
+            required
+            id="licenseNumber"
+            label="Номер лицензии"
+            onChange={handleLicenseChange}
+          />
+          <TextField
+            required
+            id="ownerFullName"
+            label="ФИО клиента"
+            onChange={handleOwnerChange}
+          />
 
-      <InputLabel id="officer">Ответственный сотрудник</InputLabel>
-      <Select
-        className={!autontificated ? css.hide : css.show}
-        labelId="officer"
-        onChange={handleOfficerChange}
-      >
-        <MenuItem value={""}>-- Выберите сотрудника --</MenuItem>
-        {data?.officers
-          ?.filter((item) => item.approved)
-          .map((item) => (
-            <MenuItem value={item._id}>
-              {item.firstName} {item.lastName}
+          <InputLabel
+            id="officer"
+            className={!autontificated ? css.hide : css.show}
+          >
+            Ответственный сотрудник
+          </InputLabel>
+          <Select
+            className={!autontificated ? css.hide : css.show}
+            labelId="officer"
+            onChange={handleOfficerChange}
+          >
+            <MenuItem value={""}>-- Выберите сотрудника --</MenuItem>
+            {data?.officers
+              ?.filter((item) => item.approved)
+              .map((item) => (
+                <MenuItem value={item._id}>
+                  {item.firstName} {item.lastName}
+                </MenuItem>
+              ))}
+          </Select>
+
+          <InputLabel id="type">Тип велосипеда *</InputLabel>
+          <Select
+            required
+            labelId="type"
+            id="bike-type-select"
+            value={type}
+            onChange={handleOptionChange}
+          >
+            <MenuItem value={""}>-- Укажите тип велосипеда --</MenuItem>
+            <MenuItem value={"general"}>
+              Дорожный (городской) велосипед
             </MenuItem>
-          ))}
-      </Select>
+            <MenuItem value={"sport"}>Спортивный велосипед</MenuItem>
+          </Select>
 
-      <InputLabel id="type">Тип велосипеда *</InputLabel>
-      <Select
-        required
-        labelId="type"
-        id="bike-type-select"
-        value={type}
-        onChange={handleOptionChange}
-      >
-        <MenuItem value={""}>-- Укажите тип велосипеда --</MenuItem>
-        <MenuItem value={"general"}>Дорожный (городской) велосипед</MenuItem>
-        <MenuItem value={"sport"}>Спортивный велосипед</MenuItem>
-      </Select>
+          <TextField
+            id="color"
+            label="Цвет велосипеда"
+            onChange={handleColorChange}
+          />
 
-      <TextField id="color" label="Цвет велосипеда" onChange={handleColorChange}/>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              id="date"
+              label="Выберите дату"
+              value={date}
+              onChange={handleDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
 
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          id="date"
-          label="Выберите дату"
-          value={date}
-          onChange={handleDateChange}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </LocalizationProvider>
+          <TextField
+            id="description"
+            label="Дополнительная информация"
+            multiline
+            rows={4}
+            onChange={handleDescriptionChange}
+          />
 
-      <TextField
-        id="description"
-        label="Дополнительная информация"
-        multiline
-        rows={4}
-        onChange={handleDescriptionChange}
-      />
-
-      <Button
-        type="submit"
-      >
-        Отправить
-      </Button>
-    </form>
+          <Button type="submit">Отправить</Button>
+        </form>
+      </div>
+    </Modal>
   );
 };

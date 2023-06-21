@@ -1,7 +1,40 @@
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .show {
-    display: block;
+    display: block !important;
 }
+
+.form_wrapper {
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: -20px;
+    margin-top: -5px;
+  }
+
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wrapper_list {
+    height: auto;
+    width: auto;
+    max-width: 96%;
+  }
+
+  .wrapper {
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-evenly;
+    border-radius: 5px;
+  }

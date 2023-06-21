@@ -26,6 +26,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate("/")
   };
 
   const [openReg, setOpenReg] = useState(false);
@@ -48,7 +49,6 @@ export const Header = () => {
         городов.
       </h1>
       <nav className={!autontificated ? css.nav : css.nav_auth}>
-        {/* TODO: MAke a logo */}
         <Logo/>
         <Button
           hide={!autontificated}

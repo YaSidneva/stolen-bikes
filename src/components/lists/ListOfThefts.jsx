@@ -22,6 +22,14 @@ export const ListOfThefts = () => {
   const data = useSelector((state) => state.reports.data);
   const token = useSelector((state) => state.auth.token);
 
+  const [isOpenAddReport, setIsOpenAddReport] = useState(false);
+  const handleOpenAddReport = () => {
+    setIsOpenAddReport(true);
+  };
+  const handleCloseAddReport = () => {
+    setIsOpenAddReport(false);
+  };
+
   const dispatch = useDispatch();
   const handleDelete = (id) => {
     dispatch(deleteReport(id, token));
@@ -44,7 +52,7 @@ export const ListOfThefts = () => {
         style={{ maxHeight: "300px", overflow: "auto", marginBottom: "10px" }}
       >
         <Table className={css.table}>
-          <TableHead>
+          <TableHead  className={css.table_head}> 
             <TableRow>
               <TableCell>Номер лицензии</TableCell>
               <TableCell>ФИО клиента</TableCell>
@@ -78,6 +86,21 @@ export const ListOfThefts = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Button className={css.button} onClick={handleOpenAddReport}>
+        Сообщить о краже
+      </Button>
+
+      <AddReport
+        open={isOpenAddReport}
+        handleClose={handleCloseAddReport}
+      />
+
+      {/* <DetailsPageEmployee
+        open={modalOpen}
+        rowData={selectedRow}
+        onClose={() => setModalOpen(false)}
+      /> */}
     </>
   );
 };
