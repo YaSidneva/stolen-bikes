@@ -122,13 +122,14 @@ export const AddReport = (props) => {
           <Select
             className={!autontificated ? css.hide : css.show}
             labelId="officer"
+            displayEmpty
             onChange={handleOfficerChange}
           >
-            <MenuItem value={""}>-- Выберите сотрудника --</MenuItem>
+            <MenuItem value={""} key={""}>-- Выберите сотрудника --</MenuItem>
             {data?.officers
               ?.filter((item) => item.approved)
               .map((item) => (
-                <MenuItem value={item._id}>
+                <MenuItem value={item._id} key={item._id}>
                   {item.firstName} {item.lastName}
                 </MenuItem>
               ))}
@@ -142,11 +143,11 @@ export const AddReport = (props) => {
             value={type}
             onChange={handleOptionChange}
           >
-            <MenuItem value={""}>-- Укажите тип велосипеда --</MenuItem>
-            <MenuItem value={"general"}>
+            <MenuItem value={""} key={''}>-- Укажите тип велосипеда --</MenuItem>
+            <MenuItem value={"general"} key={"general"}>
               Дорожный (городской) велосипед
             </MenuItem>
-            <MenuItem value={"sport"}>Спортивный велосипед</MenuItem>
+            <MenuItem value={"sport"} key={'sport'}>Спортивный велосипед</MenuItem>
           </Select>
 
           <TextField

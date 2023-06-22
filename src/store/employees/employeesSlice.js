@@ -72,4 +72,17 @@ export const createEmployee = (data, token) => async (dispatch) => {
   dispatch(getEmployees(token));
 };
 
+export const updateEmployee = (id, data, token) => async (dispatch) => {
+  await axios.put(
+    `https://sf-final-project-be.herokuapp.com/api/officers/${id}`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  dispatch(getEmployees(token));
+};
+
 export default employeesSlice.reducer;

@@ -82,7 +82,7 @@ export const ListOfEmloyees = () => {
           <TableBody style={{ overflow: 'auto', maxHeight: 250 }}>
             {data?.officers?.map((item) => (
               <TableRow
-                key={item.id}
+                key={item._id}
                 onClick={() => handleRowClick(item)}
                 className={css.row}
               >
