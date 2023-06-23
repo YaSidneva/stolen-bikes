@@ -5,6 +5,7 @@ import employeesReducer from "./employees/employeesSlice";
 import reportsReducer from "./theftReport/reportSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import { default as loginReducer } from "./authorization/loginSlice";
+import singleEmployeeReducer from "./employees/singleEmployeeSlice";
 
 const persistConfig = {
   key: "root",
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   auth: loginReducer,
   user: userReducer,
   employees: employeesReducer,
+  singleEmployee: singleEmployeeReducer,
   reports: reportsReducer
 })
 

@@ -11,11 +11,14 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useDispatch, useSelector } from "react-redux";
 import css from "/SkillFactory/yeti-react/yeti-react-app/src/components/TheftReport/TheftReport.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updateReport } from "../../../store/theftReport/reportSlice";
 import dayjs from "dayjs";
+import { getSingleEmployee } from "../../../store/employees/singleEmployeeSlice";
 
 export const DetailsPageThefts = (props) => {
+    // const { employeeId } = props.match.params;
+
   console.log(props);
   const data = useSelector((state) => state.employees.data);
   const handleModalClose = props.onClose;
@@ -73,7 +76,6 @@ export const DetailsPageThefts = (props) => {
   };
 
   const handleSubmit = (event) => {
-    
     setFormData({});
     event.preventDefault();
     console.log(event);
@@ -87,11 +89,15 @@ export const DetailsPageThefts = (props) => {
       date,
       description,
       status,
-      resolution
+      resolution,
     };
     dispatch(updateReport(rowData._id, reportData, token));
     handleModalClose();
   };
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Modal
@@ -186,7 +192,7 @@ export const DetailsPageThefts = (props) => {
               </Select>
 
               <TextField
-              defaultValue={rowData.color}
+                defaultValue={rowData.color}
                 id="color"
                 label="Цвет велосипеда"
                 onChange={handleColorChange}
@@ -194,7 +200,7 @@ export const DetailsPageThefts = (props) => {
 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                defaultValue={dayjs(new Date(rowData.date))}
+                  defaultValue={dayjs(new Date(rowData.date))}
                   id="date"
                   label="Выберите дату"
                   onChange={handleDateChange}
@@ -203,7 +209,7 @@ export const DetailsPageThefts = (props) => {
               </LocalizationProvider>
 
               <TextField
-              defaultValue={rowData.description}
+                defaultValue={rowData.description}
                 id="description"
                 label="Дополнительная информация"
                 multiline
@@ -212,7 +218,7 @@ export const DetailsPageThefts = (props) => {
               />
 
               <TextField
-              defaultValue={rowData.clientId}
+                defaultValue={rowData.clientId}
                 className={css.read_only}
                 id="clientId"
                 label="Client Id"
@@ -244,16 +250,16 @@ export const DetailsPageThefts = (props) => {
               </Select>
 
               <TextField
-              defaultValue={rowData.resulotion}
+                defaultValue={rowData.resulotion}
                 id="resulotion"
                 label="Завершающий комментарий"
                 multiline
                 rows={4}
                 onChange={handleResolutionChange}
-                required={status==='done'}
+                required={status === "done"}
                 InputProps={{
-                    readOnly: status!=='done',
-                  }}
+                  readOnly: status !== "done",
+                }}
               />
 
               <Button type="submit">Отправить</Button>

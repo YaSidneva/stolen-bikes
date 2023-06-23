@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ButtonAdd } from "../shared/buttons/button/buttonAdd";
 import { FormAddNewOfficer } from "../form/FormAddNewOfficer";
 import { Button } from "../shared/buttons/button/button";
+import { useNavigate } from "react-router-dom";
 
 export const ListOfEmloyees = () => {
   const data = useSelector((state) => state.employees.data);
@@ -27,6 +28,7 @@ export const ListOfEmloyees = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isOpenAddOfficer, setIsOpenAddOfficer] = useState(false);
   const handleOpenAddOfficer = () => {
@@ -48,8 +50,7 @@ export const ListOfEmloyees = () => {
   console.log(data);
 
   const handleRowClick = (rowData) => {
-    setSelectedRow(rowData);
-    setModalOpen(true);
+    navigate(`/employees/${rowData._id}`)
   };
 
   const handleDelete = (e, id) => {
@@ -103,12 +104,6 @@ export const ListOfEmloyees = () => {
       <FormAddNewOfficer
         open={isOpenAddOfficer}
         onClose={handleCloseAddOfficer}
-      />
-
-      <DetailsPageEmployee
-        open={modalOpen}
-        rowData={selectedRow}
-        onClose={() => setModalOpen(false)}
       />
     </>
   );
