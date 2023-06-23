@@ -32,7 +32,9 @@ export const ListOfThefts = () => {
   };
 
   const dispatch = useDispatch();
-  const handleDelete = (id) => {
+  const handleDelete = (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
     dispatch(deleteReport(id, token));
   };
 
@@ -45,11 +47,9 @@ export const ListOfThefts = () => {
   }
 
   const handleRowClick = (rowData) => {
-    if (rowData) {
-      console.log(rowData);
-      setSelectedRow(rowData);
-      setModalOpen(true);
-    }
+    console.log(rowData);
+    setSelectedRow(rowData);
+    setModalOpen(true);
   };
 
   return (
@@ -89,7 +89,7 @@ export const ListOfThefts = () => {
                   <ButtonModalClose
                     variant="contained"
                     color="secondary"
-                    onClick={() => handleDelete(item._id)}
+                    onClick={(e) => handleDelete(e, item._id)}
                   />
                 </TableCell>
               </TableRow>

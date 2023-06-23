@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import css from "/SkillFactory/yeti-react/yeti-react-app/src/components/TheftReport/TheftReport.module.scss";
 import { useState } from "react";
 import { updateReport } from "../../../store/theftReport/reportSlice";
+import dayjs from "dayjs";
 
 export const DetailsPageThefts = (props) => {
   console.log(props);
@@ -25,68 +26,55 @@ export const DetailsPageThefts = (props) => {
 
   const rowData = props.rowData;
 
-  const [licenseNumber, setSelectedLicense] = useState(null);
+  const [licenseNumber, setSelectedLicense] = useState(rowData?.licenseNumber);
   const handleLicenseChange = (event) => {
     setSelectedLicense(event.target.value);
     setFormData({ ...formData, licenseNumber: event.target.value });
   };
 
-  const [ownerFullName, setSelectedOwner] = useState(null);
+  const [ownerFullName, setSelectedOwner] = useState(rowData?.ownerFullName);
   const handleOwnerChange = (event) => {
     setSelectedOwner(event.target.value);
   };
 
-  const [officer, setSelectedOfficer] = useState(null);
+  const [officer, setSelectedOfficer] = useState(rowData?.officer);
   const handleOfficerChange = (event) => {
     setSelectedOfficer(event.target.value);
   };
 
-  const [date, setSelectedDate] = useState(null);
+  const [date, setSelectedDate] = useState(rowData?.date);
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
-  const [type, setSelectedOption] = useState("");
+  const [type, setSelectedOption] = useState(rowData?.type);
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
-  const [color, setSelectedColor] = useState(null);
+  const [color, setSelectedColor] = useState(rowData?.color);
   const handleColorChange = (event) => {
     setSelectedColor(event.target.value);
   };
 
-  const [description, setSelectedDescription] = useState(null);
+  const [description, setSelectedDescription] = useState(rowData?.description);
   const handleDescriptionChange = (event) => {
     setSelectedDescription(event.target.value);
   };
 
-  const [status, setSelectedStatus] = useState(null);
+  const [status, setSelectedStatus] = useState(rowData?.status);
   const handleStatusChange = (event) => {
     setSelectedStatus(event.target.value);
   };
 
-  const [resolution, setSelectedResolution] = useState(null);
+  const [resolution, setSelectedResolution] = useState(rowData?.resolution);
   const handleResolutionChange = (event) => {
     setSelectedResolution(event.target.value);
   };
 
-  const [createDate, setSelectedCreateDate] = useState(null);
-  const handleCreateDateChange = (event) => {
-    setSelectedCreateDate(event.target.value);
-  };
-
-  const [updateDate, setSelectedUpdateDate] = useState(null);
-  const handleUpdateDateChange = (event) => {
-    setSelectedUpdateDate(event.target.value);
-  };
-
-  const [clientId, setSelectedClientId] = useState(null);
-
   const handleSubmit = (event) => {
-    dispatch(updateReport(rowData._id, formData, token));
+    
     setFormData({});
-    handleModalClose();
     event.preventDefault();
     console.log(event);
     const reportData = {
@@ -98,17 +86,10 @@ export const DetailsPageThefts = (props) => {
       color,
       date,
       description,
+      status,
+      resolution
     };
-
-    const reportDataPublic = {
-      licenseNumber,
-      ownerFullName,
-      type,
-      color,
-      date,
-      description,
-      clientId: "a1165252-8bf2-4f9d-9200-203074b63881",
-    };
+    dispatch(updateReport(rowData._id, reportData, token));
     handleModalClose();
   };
 
@@ -173,7 +154,6 @@ export const DetailsPageThefts = (props) => {
               <InputLabel id="officer">Ответственный сотрудник</InputLabel>
               <Select
                 defaultValue={rowData.officer}
-                defaultOpen
                 labelId="officer"
                 onChange={handleOfficerChange}
               >
@@ -189,9 +169,9 @@ export const DetailsPageThefts = (props) => {
               <InputLabel id="type">Тип велосипеда *</InputLabel>
               <Select
                 required
+                defaultValue={rowData.type}
                 labelId="type"
                 id="bike-type-select"
-                value={type}
                 onChange={handleOptionChange}
               >
                 <MenuItem value={""} key={""}>
@@ -206,6 +186,7 @@ export const DetailsPageThefts = (props) => {
               </Select>
 
               <TextField
+              defaultValue={rowData.color}
                 id="color"
                 label="Цвет велосипеда"
                 onChange={handleColorChange}
@@ -213,15 +194,16 @@ export const DetailsPageThefts = (props) => {
 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
+                defaultValue={dayjs(new Date(rowData.date))}
                   id="date"
                   label="Выберите дату"
-                  value={date}
                   onChange={handleDateChange}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
 
               <TextField
+              defaultValue={rowData.description}
                 id="description"
                 label="Дополнительная информация"
                 multiline
@@ -230,6 +212,7 @@ export const DetailsPageThefts = (props) => {
               />
 
               <TextField
+              defaultValue={rowData.clientId}
                 className={css.read_only}
                 id="clientId"
                 label="Client Id"
@@ -261,6 +244,7 @@ export const DetailsPageThefts = (props) => {
               </Select>
 
               <TextField
+              defaultValue={rowData.resulotion}
                 id="resulotion"
                 label="Завершающий комментарий"
                 multiline
