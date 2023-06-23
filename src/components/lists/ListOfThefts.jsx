@@ -7,7 +7,6 @@ import {
   TableCell,
   TableContainer,
   Paper,
-  Modal,
 } from "@mui/material";
 
 import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
@@ -16,11 +15,13 @@ import { Button } from "../shared/buttons/button/button";
 import { AddReport } from "../TheftReport/TheftReport";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteReport, getReports } from "../../store/theftReport/reportSlice";
+import { DetailsPageThefts } from "./detailsPage/DetailsPageTheft";
 
 export const ListOfThefts = () => {
-
   const data = useSelector((state) => state.reports.data);
   const token = useSelector((state) => state.auth.token);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [isOpenAddReport, setIsOpenAddReport] = useState(false);
   const handleOpenAddReport = () => {
@@ -36,14 +37,20 @@ export const ListOfThefts = () => {
   };
 
   useEffect(() => {
-    dispatch(getReports(token)); // Выполняем запрос к серверу при монтировании компонента
+    dispatch(getReports(token));
   }, [dispatch, token]);
 
   if (!data) {
-    return <div>Loading...</div>; // Отображаем индикатор загрузки, пока данные загружаются
+    return <div>Loading...</div>;
   }
 
-
+  const handleRowClick = (rowData) => {
+    if (rowData) {
+      console.log(rowData);
+      setSelectedRow(rowData);
+      setModalOpen(true);
+    }
+  };
 
   return (
     <>
@@ -52,7 +59,7 @@ export const ListOfThefts = () => {
         style={{ maxHeight: "300px", overflow: "auto", marginBottom: "10px" }}
       >
         <Table className={css.table}>
-          <TableHead  className={css.table_head}> 
+          <TableHead className={css.table_head}>
             <TableRow>
               <TableCell>Номер лицензии</TableCell>
               <TableCell>ФИО клиента</TableCell>
@@ -66,7 +73,11 @@ export const ListOfThefts = () => {
           </TableHead>
           <TableBody>
             {data?.data?.map((item) => (
-              <TableRow key={item._id} className={css.row}>
+              <TableRow
+                key={item._id}
+                className={css.row}
+                onClick={() => handleRowClick(item)}
+              >
                 <TableCell>{item.licenseNumber}</TableCell>
                 <TableCell>{item.ownerFullName}</TableCell>
                 <TableCell>{item.type}</TableCell>
@@ -91,16 +102,13 @@ export const ListOfThefts = () => {
         Сообщить о краже
       </Button>
 
-      <AddReport
-        open={isOpenAddReport}
-        handleClose={handleCloseAddReport}
-      />
+      <AddReport open={isOpenAddReport} handleClose={handleCloseAddReport} />
 
-      {/* <DetailsPageEmployee
+      <DetailsPageThefts
         open={modalOpen}
         rowData={selectedRow}
         onClose={() => setModalOpen(false)}
-      /> */}
+      />
     </>
   );
 };

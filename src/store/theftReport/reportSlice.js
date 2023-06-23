@@ -79,4 +79,17 @@ export const createReportPublic = (data) => async (dispatch) => {
   );
 };
 
+export const updateReport = (id, data, token) => async (dispatch) => {
+  await axios.put(
+    `https://sf-final-project-be.herokuapp.com/api/cases/${id}`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  dispatch(getReports(token));
+};
+
 export default reportsSlice.reducer;

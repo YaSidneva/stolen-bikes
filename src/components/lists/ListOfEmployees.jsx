@@ -22,12 +22,6 @@ import { FormAddNewOfficer } from "../form/FormAddNewOfficer";
 import { Button } from "../shared/buttons/button/button";
 
 export const ListOfEmloyees = () => {
-  //   const [data, setData] = useDispatch(getEmployees());
-  //   useState([
-  //     { id: 1, email: 1, firstName: "John", lastName: 25, approved: true },
-  //     { id: 2, email: 1, firstName: "John", lastName: 25, approved: true },
-  //     { id: 3, email: 1, firstName: "John", lastName: 25, approved: false },
-  //   ]);
   const data = useSelector((state) => state.employees.data);
   const token = useSelector((state) => state.auth.token);
   const [modalOpen, setModalOpen] = useState(false);
@@ -48,7 +42,7 @@ export const ListOfEmloyees = () => {
   }, [dispatch, token]);
 
   if (!data) {
-    return <div>Loading...</div>; // Отображаем индикатор загрузки, пока данные загружаются
+    return <div>Loading...</div>;
   }
 
   console.log(data);
