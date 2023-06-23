@@ -250,6 +250,10 @@ export const DetailsPageThefts = (props) => {
                 multiline
                 rows={4}
                 onChange={handleResolutionChange}
+                required={status==='done'}
+                InputProps={{
+                    readOnly: status!=='done',
+                  }}
               />
 
               <Button type="submit">Отправить</Button>
