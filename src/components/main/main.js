@@ -2,9 +2,7 @@ import { useState } from "react";
 import css from "./main.module.scss";
 import { Button } from "../shared/buttons/button/button";
 import Image from "../shared/images/yeti-stole-bike.jpg";
-import { Modal } from "@mui/material";
 import { AddReport } from "../TheftReport/TheftReport";
-import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
 
 export const Main = (props) => {
   const [open, setOpen] = useState(false);

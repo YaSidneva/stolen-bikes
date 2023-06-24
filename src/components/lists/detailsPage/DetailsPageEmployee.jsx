@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Checkbox, Button, Modal, TextField, styled } from "@mui/material";
+import { Checkbox, Button, TextField} from "@mui/material";
 import { ButtonModalClose } from "../../shared/buttons/button/ButtonModalClose";
-import css from "/SkillFactory/yeti-react/yeti-react-app/src/components/lists/detailsPage/DetailsPageEmployee.module.scss";
+import css from "./DetailsPageEmployee.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { updateEmployee } from "../../../store/employees/employeesSlice";
 import { getSingleEmployee } from "../../../store/employees/singleEmployeeSlice";
@@ -16,7 +16,7 @@ export const DetailsPageEmployee = (props) => {
 
   const rowData = useSelector((state) => state.singleEmployee.data.data);
   useEffect(() => {
-    dispatch(getSingleEmployee(employeeId, token)); // Выполняем запрос к серверу при монтировании компонента
+    dispatch(getSingleEmployee(employeeId, token));
   }, [dispatch, token, employeeId]);
 
   const handleSubmit = (e) => {
@@ -74,6 +74,7 @@ export const DetailsPageEmployee = (props) => {
                 label="Password"
                 defaultValue={"******"}
                 onChange={handlePasswordChange}
+                required
               />
 
               <TextField

@@ -10,14 +10,12 @@ import {
   Checkbox,
 } from "@mui/material";
 import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
-import { DetailsPageEmployee } from "./detailsPage/DetailsPageEmployee";
 import css from "./ListOfEmployees.module.scss";
 import {
   deleteEmployee,
   getEmployees,
 } from "../../store/employees/employeesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { ButtonAdd } from "../shared/buttons/button/buttonAdd";
 import { FormAddNewOfficer } from "../form/FormAddNewOfficer";
 import { Button } from "../shared/buttons/button/button";
 import { useNavigate } from "react-router-dom";
@@ -25,8 +23,6 @@ import { useNavigate } from "react-router-dom";
 export const ListOfEmloyees = () => {
   const data = useSelector((state) => state.employees.data);
   const token = useSelector((state) => state.auth.token);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,7 +36,7 @@ export const ListOfEmloyees = () => {
   };
 
   useEffect(() => {
-    dispatch(getEmployees(token)); // Выполняем запрос к серверу при монтировании компонента
+    dispatch(getEmployees(token)); 
   }, [dispatch, token]);
 
   if (!data) {

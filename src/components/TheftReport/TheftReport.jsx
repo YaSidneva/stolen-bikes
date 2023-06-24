@@ -3,13 +3,11 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getUserData } from "../../store/authorization/authorizationSlice";
 import css from "./TheftReport.module.scss";
 import {
   createReport,
   createReportPublic,
 } from "../../store/theftReport/reportSlice";
-import { Form } from "../form/Form";
 import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
 
 export const AddReport = (props) => {
@@ -137,13 +135,13 @@ export const AddReport = (props) => {
 
           <InputLabel id="type">Тип велосипеда *</InputLabel>
           <Select
-            required
             labelId="type"
             id="bike-type-select"
-            defaultValue={" "}
             onChange={handleOptionChange}
+            required // Атрибут required для элемента select
+            inputProps={{
+              required: true,}}
           >
-            <MenuItem value={" "} key={''}>-- Укажите тип велосипеда --</MenuItem>
             <MenuItem value={"general"} key={"general"}>
               Дорожный (городской) велосипед
             </MenuItem>

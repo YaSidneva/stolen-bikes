@@ -27,7 +27,6 @@ const autorizationSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-  //  builder.addCase();
   },
 });
 

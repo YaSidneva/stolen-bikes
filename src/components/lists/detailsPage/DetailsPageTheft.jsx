@@ -2,7 +2,6 @@ import {
   Button,
   InputLabel,
   MenuItem,
-  Modal,
   Select,
   TextField,
 } from "@mui/material";
@@ -10,18 +9,16 @@ import { ButtonModalClose } from "../../shared/buttons/button/ButtonModalClose";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useDispatch, useSelector } from "react-redux";
-import css from "/SkillFactory/yeti-react/yeti-react-app/src/components/TheftReport/TheftReport.module.scss";
+import css from "./DetailsPageThefts.module.scss";
 import { useEffect, useState } from "react";
 import { updateReport } from "../../../store/theftReport/reportSlice";
 import dayjs from "dayjs";
-import { getSingleEmployee } from "../../../store/employees/singleEmployeeSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSingleReport } from "../../../store/theftReport/singleReportSlice";
 
 export const DetailsPageThefts = (props) => {
   console.log(props);
   const data = useSelector((state) => state.employees.data);
-  const handleModalClose = props.onClose;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { theftId } = useParams();
@@ -31,10 +28,9 @@ export const DetailsPageThefts = (props) => {
   const rowData = useSelector((state) => state.singleReport.data.data);
 
   useEffect(() => {
-    dispatch(getSingleReport(theftId, token)); // Выполняем запрос к серверу при монтировании компонента
+    dispatch(getSingleReport(theftId, token));
   }, [dispatch, token, theftId]);
 
-  //   const rowData = props.rowData;
 
   const [licenseNumber, setSelectedLicense] = useState(rowData?.licenseNumber);
   const handleLicenseChange = (event) => {
@@ -176,15 +172,14 @@ export const DetailsPageThefts = (props) => {
 
                 <InputLabel id="type">Тип велосипеда *</InputLabel>
                 <Select
-                  required
+                  required 
+                  inputProps={{
+                    required: true,}}
                   defaultValue={rowData.type ?? ""}
                   labelId="type"
                   id="bike-type-select"
                   onChange={handleOptionChange}
                 >
-                  <MenuItem value={""} key={""}>
-                    -- Укажите тип велосипеда --
-                  </MenuItem>
                   <MenuItem value={"general"} key={"general"}>
                     Дорожный (городской) велосипед
                   </MenuItem>

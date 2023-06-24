@@ -15,7 +15,6 @@ import { Button } from "../shared/buttons/button/button";
 import { AddReport } from "../TheftReport/TheftReport";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteReport, getReports } from "../../store/theftReport/reportSlice";
-import { DetailsPageThefts } from "./detailsPage/DetailsPageTheft";
 import { useNavigate } from "react-router-dom";
 
 export const ListOfThefts = () => {
@@ -49,11 +48,6 @@ export const ListOfThefts = () => {
   const handleRowClick = (rowData) => {
     navigate(`/cases/${rowData._id}`);
   };
-  // const handleRowClick = (rowData) => {
-  //   console.log(rowData);
-  //   setSelectedRow(rowData);
-  //   setModalOpen(true);
-  // };
 
   return (
     <>

@@ -1,12 +1,8 @@
 import { useState } from "react";
 import css from "./header.module.scss";
 import { Button } from "../shared/buttons/button/button";
-import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
 import { Form } from "../form/Form";
 import { FormRegistration } from "../form/FormRegistration";
-import { ListOfThefts } from "../lists/ListOfThefts";
-import { ListOfEmloyees } from "../lists/ListOfEmployees";
-import { Modal } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/authorization/loginSlice";
 import { useNavigate } from "react-router-dom";

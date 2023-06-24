@@ -1,11 +1,9 @@
 import { Button, TextField, Modal } from "@mui/material";
 import { useDispatch } from "react-redux";
 import css from "../header/header.module.scss";
-//import { getUserData } from "../../store/authorization/authorizationSlice";
 import React, { useState } from "react";
 import { registerUser } from "../../store/registration/userSlice";
 import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
-//import userSlice from "../../store/registration/userSlice";
 
 export const FormRegistration = (props) => {
   const dispatch = useDispatch();

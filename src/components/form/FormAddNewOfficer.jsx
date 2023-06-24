@@ -10,7 +10,6 @@ import css from "../header/header.module.scss";
 import React, { useState } from "react";
 import { ButtonModalClose } from "../shared/buttons/button/ButtonModalClose";
 import { createEmployee } from "../../store/employees/employeesSlice";
-//import userSlice from "../../store/registration/userSlice";
 
 export const FormAddNewOfficer = (props) => {
   const dispatch = useDispatch();
