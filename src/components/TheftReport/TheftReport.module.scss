@@ -29,8 +29,9 @@
   }
 
   .wrapper {
-    width: 50%;
-    height: 50%;
+    align-self: center;
+    height: 98%;
+    width: 90%;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -45,7 +46,6 @@
 
   .form_content {
     height: 100%;
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     gap: 16px;

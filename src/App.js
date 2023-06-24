@@ -1,12 +1,10 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { Main } from "./components/main/main";
-import { Layout } from "./components/layout/layout";
-import { Footer } from "./components/footer/footer";
 import { ListOfEmloyees } from "./components/lists/ListOfEmployees";
-import { Header } from "./components/header/header";
 import { ListOfThefts } from "./components/lists/ListOfThefts";
 import { Root } from "./components/root/Root";
 import { DetailsPageEmployee } from "./components/lists/detailsPage/DetailsPageEmployee";
+import { DetailsPageThefts } from "./components/lists/detailsPage/DetailsPageTheft";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +29,10 @@ const router = createBrowserRouter([
         path: '/employees/:employeeId',
         element: <DetailsPageEmployee />
       },
+      {
+        path: '/cases/:theftId',
+        element: <DetailsPageThefts />
+      }
     ],
   },
 ]);

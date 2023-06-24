@@ -16,12 +16,12 @@ import { AddReport } from "../TheftReport/TheftReport";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteReport, getReports } from "../../store/theftReport/reportSlice";
 import { DetailsPageThefts } from "./detailsPage/DetailsPageTheft";
+import { useNavigate } from "react-router-dom";
 
 export const ListOfThefts = () => {
   const data = useSelector((state) => state.reports.data);
   const token = useSelector((state) => state.auth.token);
-  const [selectedRow, setSelectedRow] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const [isOpenAddReport, setIsOpenAddReport] = useState(false);
   const handleOpenAddReport = () => {
@@ -47,10 +47,13 @@ export const ListOfThefts = () => {
   }
 
   const handleRowClick = (rowData) => {
-    console.log(rowData);
-    setSelectedRow(rowData);
-    setModalOpen(true);
+    navigate(`/cases/${rowData._id}`);
   };
+  // const handleRowClick = (rowData) => {
+  //   console.log(rowData);
+  //   setSelectedRow(rowData);
+  //   setModalOpen(true);
+  // };
 
   return (
     <>
@@ -103,12 +106,6 @@ export const ListOfThefts = () => {
       </Button>
 
       <AddReport open={isOpenAddReport} handleClose={handleCloseAddReport} />
-
-      <DetailsPageThefts
-        open={modalOpen}
-        rowData={selectedRow}
-        onClose={() => setModalOpen(false)}
-      />
     </>
   );
 };

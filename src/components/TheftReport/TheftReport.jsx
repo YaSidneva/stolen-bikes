@@ -97,7 +97,7 @@ export const AddReport = (props) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <div className={css.wrapper} style={{ height: "98%" }}>
+      <div className={css.wrapper}>
         <ButtonModalClose onClick={props.handleClose} />
         <form onSubmit={handleSubmit} className={css.form_wrapper}>
           <TextField
@@ -122,10 +122,10 @@ export const AddReport = (props) => {
           <Select
             className={!autontificated ? css.hide : css.show}
             labelId="officer"
-            displayEmpty
+            defaultValue={" "}
             onChange={handleOfficerChange}
           >
-            <MenuItem value={""} key={""}>-- Выберите сотрудника --</MenuItem>
+            <MenuItem value={" "} key={""}>-- Выберите сотрудника --</MenuItem>
             {data?.officers
               ?.filter((item) => item.approved)
               .map((item) => (
@@ -140,10 +140,10 @@ export const AddReport = (props) => {
             required
             labelId="type"
             id="bike-type-select"
-            value={type}
+            defaultValue={" "}
             onChange={handleOptionChange}
           >
-            <MenuItem value={""} key={''}>-- Укажите тип велосипеда --</MenuItem>
+            <MenuItem value={" "} key={''}>-- Укажите тип велосипеда --</MenuItem>
             <MenuItem value={"general"} key={"general"}>
               Дорожный (городской) велосипед
             </MenuItem>
