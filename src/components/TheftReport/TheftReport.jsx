@@ -58,7 +58,6 @@ export const AddReport = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
     const reportData = {
       licenseNumber,
       ownerFullName,

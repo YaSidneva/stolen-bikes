@@ -22,7 +22,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/")
+    navigate("")
   };
 
   const [openReg, setOpenReg] = useState(false);
@@ -49,7 +49,7 @@ export const Header = () => {
         <Button
           hide={!autontificated}
           className={css.button}
-          onClick={() => navigate("/thefts")}
+          onClick={() => navigate("thefts")}
         >
           Список краж
         </Button>
@@ -57,7 +57,7 @@ export const Header = () => {
         <Button
           hide={!autontificated}
           className={css.button}
-          onClick={() => navigate("/employees")}
+          onClick={() => navigate("employees")}
         >
           Список сотрудников
         </Button>
