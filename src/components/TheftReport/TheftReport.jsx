@@ -138,7 +138,7 @@ export const AddReport = (props) => {
             labelId="type"
             id="bike-type-select"
             onChange={handleOptionChange}
-            required // Атрибут required для элемента select
+            required 
             inputProps={{
               required: true,}}
           >
