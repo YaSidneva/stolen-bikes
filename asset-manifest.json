@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/stolen-bikes/static/css/main.1486fde6.css",
+    "main.js": "/stolen-bikes/static/js/main.78779b59.js",
+    "static/js/787.79d4e1c7.chunk.js": "/stolen-bikes/static/js/787.79d4e1c7.chunk.js",
+    "static/media/yeti-stole-bike.jpg": "/stolen-bikes/static/media/yeti-stole-bike.00d84fb09f6914cf6066.jpg",
+    "index.html": "/stolen-bikes/index.html",
+    "main.1486fde6.css.map": "/stolen-bikes/static/css/main.1486fde6.css.map",
+    "main.78779b59.js.map": "/stolen-bikes/static/js/main.78779b59.js.map",
+    "787.79d4e1c7.chunk.js.map": "/stolen-bikes/static/js/787.79d4e1c7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1486fde6.css",
+    "static/js/main.78779b59.js"
+  ]
+}
