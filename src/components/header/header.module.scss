@@ -1,72 +1,72 @@
 .header {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: space-between;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  h1 {
-    text-align: center;
-  }
+h1 {
+  text-align: center;
+}
 
-  .nav {
-    min-width: 300px;
-    max-width: 450px;
+.nav {
+  min-width: 300px;
+  max-width: 450px;
   display: flex;
   justify-content: space-between;
   align-self: end;
-  }
+}
 
-  .form_wrapper {
-    width: 50%;
-    height: 50%;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    justify-content: space-evenly;
-    border-radius: 5px;
-  }
+.form_wrapper {
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-evenly;
+  border-radius: 5px;
+}
 
-  .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .wrapper_list {
-    height: auto;
-    width: auto;
-    max-width: 96%;
-  }
+.wrapper_list {
+  height: auto;
+  width: auto;
+  max-width: 96%;
+}
 
-  .nav_auth {
-    width: 40%;
-    display: flex;
+.nav_auth {
+  width: 40%;
+  display: flex;
   justify-content: space-between;
   align-self: end;
-  }
+  min-width: 300px;
+  max-width: 450px;
+}
 
-  
-
-  @media all and (max-width: 380px) {
-    .nav {
-      min-width: 290px;
-      align-self: center;
-    }
+@media all and (max-width: 380px) {
+  .nav {
+    min-width: 290px;
+    align-self: center;
   }
+}
 
-  @media all and (max-width: 1080px) {
-    .nav_auth {
-      min-width: 420px;
-    }
+@media all and (max-width: 1080px) {
+  .nav_auth {
+    min-width: 420px;
   }
+}
 
-  @media all and (max-width: 563px) {
-    .nav_auth {
-      font-size: 18px;
-      flex-direction: column;
-      height: 150px;
-      min-width: 201px;
-    }
+@media all and (max-width: 563px) {
+  .nav_auth {
+    font-size: 18px;
+    flex-direction: column;
+    height: 150px;
+    min-width: 201px;
   }
+}
