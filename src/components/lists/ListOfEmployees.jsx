@@ -43,8 +43,6 @@ export const ListOfEmloyees = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(data);
-
   const handleRowClick = (rowData) => {
     navigate(`/employees/${rowData._id}`)
   };

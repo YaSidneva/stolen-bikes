@@ -17,7 +17,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getSingleReport } from "../../../store/theftReport/singleReportSlice";
 
 export const DetailsPageThefts = (props) => {
-  console.log(props);
   const data = useSelector((state) => state.employees.data);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,6 +29,8 @@ export const DetailsPageThefts = (props) => {
   useEffect(() => {
     dispatch(getSingleReport(theftId, token));
   }, [dispatch, token, theftId]);
+
+  
 
 
   const [licenseNumber, setSelectedLicense] = useState(rowData?.licenseNumber);
@@ -81,7 +82,6 @@ export const DetailsPageThefts = (props) => {
   const handleSubmit = (event) => {
     setFormData({});
     event.preventDefault();
-    console.log(event);
     const reportData = {
       clientId: "a1165252-8bf2-4f9d-9200-203074b63881",
       licenseNumber,

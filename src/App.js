@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Main } from "./components/main/main";
 import { ListOfEmloyees } from "./components/lists/ListOfEmployees";
 import { ListOfThefts } from "./components/lists/ListOfThefts";

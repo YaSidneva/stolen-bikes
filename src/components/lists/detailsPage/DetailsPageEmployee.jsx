@@ -20,7 +20,6 @@ export const DetailsPageEmployee = (props) => {
   }, [dispatch, token, employeeId]);
 
   const handleSubmit = (e) => {
-    console.log(e);
     e.preventDefault();
     dispatch(updateEmployee(rowData._id, formData, token));
     setFormData({});
